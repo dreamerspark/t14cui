@@ -82,13 +82,12 @@ public class Ball {
 
 	private void gravity() {
 		// TODO 自動生成されたメソッド・スタブ
-		
+		vy += 1;
 	}
 
 	private void move() {
 		x += vx;
 		y += vy;
-
 		// 左右の壁にぶつかった場合にバウンド
 		if (x < 0 || x > WIDTH) {
 			boundX();

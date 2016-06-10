@@ -17,7 +17,7 @@ public class Model {
 
 	public Model() {
 		this.player = new Player(this);
-		ball = new Ball(player.getX(), player.getY()-2, 1, 1, player);
+		ball = new Ball(player.getX(), player.getY()-2, player);
 		this.view = new View(this, player,ball);
 		this.controller = new Controller(this);
 		
