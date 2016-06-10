@@ -71,10 +71,26 @@ public class Ball {
 		collision();
 		switch (EASY) {
 		case EASY:
-			
+			move();
 			break;
 		case NORMAL:	
 		case HARD:
 		}
+	}
+
+	private void move() {
+		  x += vx;
+	        y += vy;
+
+	        // 左右の壁にぶつかった場合にバウンド
+	        if (x < 0 || x > WIDTH - ) {
+	            boundX();
+	        }
+
+	        // 上の壁にぶつかった場合にバウンド
+	        if (y < 0) {
+	            boundY();
+	        }
+	    }
 	}
 }
