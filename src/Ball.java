@@ -50,11 +50,10 @@ public class Ball {
 		vy = -vy;
 	}
 
-
-    public void boundXY() {
-        vx = -vx;
-        vy = -vy;
-    }
+	public void boundXY() {
+		vx = -vx;
+		vy = -vy;
+	}
 
 	public void collision() {
 		if (this.x >= player.getX() - 2 && this.x <= player.getX() + 2) {
@@ -73,24 +72,31 @@ public class Ball {
 		case EASY:
 			move();
 			break;
-		case NORMAL:	
+		case NORMAL:
+			gravity();
+			move();
+			break;
 		case HARD:
 		}
 	}
 
+	private void gravity() {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
+
 	private void move() {
-		  x += vx;
-	        y += vy;
+		x += vx;
+		y += vy;
 
-	        // 左右の壁にぶつかった場合にバウンド
-	        if (x < 0 || x > WIDTH - ) {
-	            boundX();
-	        }
+		// 左右の壁にぶつかった場合にバウンド
+		if (x < 0 || x > WIDTH) {
+			boundX();
+		}
 
-	        // 上の壁にぶつかった場合にバウンド
-	        if (y < 0) {
-	            boundY();
-	        }
-	    }
+		// 上の壁にぶつかった場合にバウンド
+		if (y < 0 || y > HEIGHT) {
+			boundY();
+		}
 	}
 }
