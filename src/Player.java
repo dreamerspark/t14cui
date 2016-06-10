@@ -16,7 +16,7 @@ public class Player {
 		this.y = 41;
 		this.left = 3;
 		this.model = model;
-		this.Width=76;
+		this.Width = 76;
 	}
 
 	public int getX() {
@@ -30,11 +30,13 @@ public class Player {
 	public void update(int a) {
 		if (a == LEFT) {
 			if (x - 4 > 0)
-				x-=2;
+			x-=2;
+	//x--;
 		}
 		if (a == RIGHT) {
 			if (x + 4 < Width)
 				x+=2;
+		//x++;
 		}
 		if (a == DAMAGE) {
 			if (left == 0)
@@ -46,7 +48,5 @@ public class Player {
 	public void collision(Ball ball) {
 
 	}
-
-	
 
 }
