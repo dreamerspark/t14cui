@@ -4,9 +4,9 @@ public class View {
 	private static int WIDTH = 80;
 	private static int HEIGHT = 43;
 
-	private Model model;
 	private Player player;
 	private Ball ball;
+	private Model model;
 
 	public View() {
 		this(HEIGHT, WIDTH);
@@ -14,7 +14,7 @@ public class View {
 
 	public View(Model model, Player player,Ball ball) {
 		this();
-		this.model = model;
+		//this.model = model;
 		this.player = player;
 		this.ball= ball;
 	}
@@ -26,7 +26,7 @@ public class View {
 
 	public View(int a, int b, Model model) {
 		this(a, b);
-		this.model = model;
+		//this.model = model;
 	}
 
 	public void clear() {

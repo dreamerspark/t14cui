@@ -29,12 +29,12 @@ public class Player {
 
 	public void update(int a) {
 		if (a == LEFT) {
-			if (x - 2 > 0)
-				x--;
+			if (x - 4 > 0)
+				x-=2;
 		}
 		if (a == RIGHT) {
-			if (x + 2 < Width)
-				x++;
+			if (x + 4 < Width)
+				x+=2;
 		}
 		if (a == DAMAGE) {
 			if (left == 0)
