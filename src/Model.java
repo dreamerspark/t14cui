@@ -7,6 +7,7 @@ public class Model {
 	private Controller controller;
 
 	private int mode;
+	private int timech = 0;
 	private LinkedList<Bullet> bullets;
 	private Ball ball;
 	private static final int EASY = 1;
@@ -17,15 +18,19 @@ public class Model {
 
 	public Model() {
 		this.player = new Player(this);
-		ball = new Ball(player.getX(), player.getY()-2, player);
-		this.view = new View(this, player,ball);
+		ball = new Ball(player.getX(), player.getY() - 2, player);
+		this.view = new View(this, player, ball);
 		this.controller = new Controller(this);
-		
+
 	}
 
 	public synchronized void process(String event) {
 		if (event.equals("TIME_ELAPSED")) {
-			ball.update();
+			if (timech == 2) {
+				ball.update();
+				timech = 0;
+			}
+			timech++;
 		}
 		// for (Bullet b : bullets)
 		// b.update();
@@ -35,7 +40,7 @@ public class Model {
 			player.update(LEFT);
 		else if (event.equals("RIGHT"))
 			player.update(RIGHT);
-		
+
 		view.update();
 	}
 

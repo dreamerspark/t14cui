@@ -12,11 +12,11 @@ public class View {
 		this(HEIGHT, WIDTH);
 	}
 
-	public View(Model model, Player player,Ball ball) {
+	public View(Model model, Player player, Ball ball) {
 		this();
-		//this.model = model;
+		// this.model = model;
 		this.player = player;
-		this.ball= ball;
+		this.ball = ball;
 	}
 
 	public View(int a, int b) {
@@ -26,7 +26,7 @@ public class View {
 
 	public View(int a, int b, Model model) {
 		this(a, b);
-		//this.model = model;
+		// this.model = model;
 	}
 
 	public void clear() {
@@ -68,13 +68,16 @@ public class View {
 	public void update() {
 		// TODO 自動生成されたメソッド・スタブ
 		clear();
-		drawString("■■■■■", player.getX(), player.getY());
+		drawString("■■■■■", player.getX() - 3, player.getY());
 		drawRect('#', 0, 1, WIDTH, HEIGHT - 1);
-		put('*',ball.getX(),ball.getY());
+		put('*', player.getX(), player.getY());
+		put('*', ball.getX(), ball.getY());
+		drawString(Integer.toString(player.getX()), WIDTH - 4, HEIGHT - 5);
+		drawString(Integer.toString(ball.getX()), WIDTH - 4, HEIGHT - 4);
 
-//		for (int i = 0; i < model.NumOfBullets(); i++) {
-	//		put('*', model.getBullet(i).getX(), model.getBullet(i).getY());
-		//}
+		// for (int i = 0; i < model.NumOfBullets(); i++) {
+		// put('*', model.getBullet(i).getX(), model.getBullet(i).getY());
+		// }
 
 		paint();
 	}

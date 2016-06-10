@@ -56,11 +56,15 @@ public class Ball {
 	}
 
 	public void collision() {
-		if (this.x >= player.getX() - 2 && this.x <= player.getX() + 4) {
+		if (this.x >= player.getX() - 4 && this.x <= player.getX() + 4) {
+			int ch;
 			if (this.y == player.getY()) {
 				vy = -vy;
-				int ch = this.x - player.getX();
-				vx += ch;
+				ch = this.x - player.getX()-1;
+				vx+=ch;
+				/*
+				 * int ch = this.x - player.getX(); vx += ch;
+				 */
 			}
 		}
 
