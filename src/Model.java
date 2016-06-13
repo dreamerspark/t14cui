@@ -80,9 +80,9 @@ public class Model {
 
 	}
 
-	public void gameover() {
+	public static boolean gameover() {
 		// TODO 自動生成されたメソッド・スタブ
-
+		return true;
 	}
 
 }

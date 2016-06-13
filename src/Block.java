@@ -14,4 +14,9 @@ public Block(int x,int y,boolean d){
 	isDeleted=d;
 }
 
+public boolean isDeleted() {
+	// TODO 自動生成されたメソッド・スタブ
+	return isDeleted;
+}
+
 }
