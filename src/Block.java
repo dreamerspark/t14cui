@@ -11,8 +11,8 @@ public Block(int x, int y){
 }
 
 public Block(int x,int y,boolean d){
-	this.x=x+3;
-	this.y=y+3;
+	this.x=x;
+	this.y=y;
 	isDeleted=d;
 	mode=0;
 }

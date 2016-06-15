@@ -4,10 +4,10 @@ public class Map {
 	private Ball ball;
 	private View view;
 	// ブロックの行数
-	private static final int NUM_BLOCK_ROW = 60;
+	private static final int NUM_BLOCK_ROW = 20;
 	// ブロックの列数
-	private static final int NUM_BLOCK_COL = 15;
-	// ブロック数
+	private static final int NUM_BLOCK_COL = 75;
+	// ブロック
 	private static final int NUM_BLOCK = NUM_BLOCK_ROW * NUM_BLOCK_COL;
 
 	public Map(Ball ball) {
@@ -32,8 +32,8 @@ this.ball=ball;
 		int dx, dy;
 		dx = 3;
 		dy = 3;
-		for (int i = 0; i < NUM_BLOCK_COL; i++) {
-			for (int j = 0; j < NUM_BLOCK_ROW; j++) {
+		for (int i = 0; i < NUM_BLOCK_ROW; i++) {
+			for (int j = 0; j < NUM_BLOCK_COL; j++) {
 				if (block[i * NUM_BLOCK_COL + j].isDeleted() == false) {
 					if (block[i * NUM_BLOCK_COL + j].getMode() == 0) {
 						view.put('■', dx + j, dy + i);
@@ -48,12 +48,11 @@ this.ball=ball;
 		int x, y;
 		x = ball.getX();
 		y = ball.getY();
-		int pos = (y+3)  + (x)*NUM_BLOCK_ROW;
 
 		for (int i = 0; i < NUM_BLOCK; i++) {
 			if (block[i].isDeleted()==true)
 				continue;
-			else if (i == pos)
+			else if (block[i].getX()==x-3&&block[i].getY()==y-3)
 				block[i].Delete();
 		}
 	}
