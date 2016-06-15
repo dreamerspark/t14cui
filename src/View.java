@@ -7,16 +7,19 @@ public class View {
 	private Player player;
 	private Ball ball;
 	private Model model;
+	private Map map;
 
 	public View() {
 		this(HEIGHT, WIDTH);
 	}
 
-	public View(Model model, Player player, Ball ball) {
+	public View(Model model, Player player, Ball ball,Map map) {
 		this();
 		// this.model = model;
 		this.player = player;
 		this.ball = ball;
+		this.map = map;
+		map.setView(this);
 	}
 
 	public View(int a, int b) {
@@ -41,7 +44,6 @@ public class View {
 		if (y >= 0 && y < screen.length)
 			if (x >= 0 && x < screen[y].length)
 				screen[y][x] = c;
-
 	}
 
 	public void drawString(String s, int x, int y) {
@@ -68,9 +70,10 @@ public class View {
 	public void update() {
 		// TODO 自動生成されたメソッド・スタブ
 		clear();
+		map.draw();
 		drawString("■■■■■", player.getX() - 3, player.getY());
 		drawRect('#', 0, 1, WIDTH, HEIGHT - 1);
-		put('*', player.getX(), player.getY());
+	//	put('*', player.getX(), player.getY());
 		put('*', ball.getX(), ball.getY());
 		drawString(Integer.toString(player.getX()), WIDTH - 4, HEIGHT - 5);
 		drawString(Integer.toString(ball.getX()), WIDTH - 4, HEIGHT - 4);

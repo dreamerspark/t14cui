@@ -10,6 +10,7 @@ public class Model {
 	private int timech = 0;
 	private LinkedList<Bullet> bullets;
 	private Ball ball;
+	private Map map;
 	private static final int EASY = 1;
 	private static final int NORMAL = 2;
 	private static final int HARD = 3;
@@ -19,7 +20,8 @@ public class Model {
 	public Model() {
 		this.player = new Player(this);
 		ball = new Ball(player.getX(), player.getY() - 2, player);
-		this.view = new View(this, player, ball);
+		map = new Map(ball);
+		this.view = new View(this, player, ball,map);
 		this.controller = new Controller(this);
 
 	}
@@ -29,6 +31,7 @@ public class Model {
 			if (timech == 2) {
 				ball.update();
 				timech = 0;
+				map.Collision();
 			}
 			timech++;
 		}
