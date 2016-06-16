@@ -25,16 +25,16 @@ public class Ball {
 		return x;
 	}
 
-	public void setX(int x) {
-		this.x = x;
-	}
-
 	public int getY() {
 		return y;
 	}
 
-	public void setY(int y) {
-		this.y = y;
+	public int getVx() {
+		return vx;
+	}
+
+	public int getVy() {
+		return vy;
 	}
 
 	public void setspeed(int x, int y) {
@@ -59,9 +59,9 @@ public class Ball {
 		if (this.x >= player.getX() - 4 && this.x <= player.getX() + 4) {
 			int ch;
 			if (this.y == player.getY()) {
-				vy = -vy;
-				ch = this.x - player.getX()-1;
-				vx+=ch;
+				vy = -vy-3;
+				ch = this.x - player.getX() - 1;
+				vx += ch;
 				/*
 				 * int ch = this.x - player.getX(); vx += ch;
 				 */
@@ -71,19 +71,26 @@ public class Ball {
 	}
 
 	public void update() {
+	
 		collision();
-		switch (EASY) {
+		switch (NORMAL) {
 		case EASY:
 			move();
 			break;
 		case NORMAL:
-			gravity();
+			if (times == 3) {
+				gravity();
+				times = 0;
+			}
 			move();
 			break;
 		case HARD:
 		}
+		times++;
+
 	}
 
+	
 	private void gravity() {
 		// TODO 自動生成されたメソッド・スタブ
 		vy += 1;
@@ -93,13 +100,15 @@ public class Ball {
 		x += vx;
 		y += vy;
 		// 左右の壁にぶつかった場合にバウンド
-		if (x < 0 || x > WIDTH) {
+		if (x < 1 || x > WIDTH-1) {
 			boundX();
 		}
-
 		// 上の壁にぶつかった場合にバウンド
-		if (y < 0 || y > HEIGHT) {
+		if (y < 1 || y > HEIGHT-2) {
 			boundY();
+			if(y>HEIGHT-1)vy+=2;
 		}
+		if(y>HEIGHT-2)y=HEIGHT-2;
+		
 	}
 }

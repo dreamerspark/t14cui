@@ -6,14 +6,14 @@ public class Map {
 	// ブロックの行数
 	private static final int NUM_BLOCK_ROW = 20;
 	// ブロックの列数
-	private static final int NUM_BLOCK_COL = 75;
+	private static final int NUM_BLOCK_COL = 38;
 	// ブロック
 	private static final int NUM_BLOCK = NUM_BLOCK_ROW * NUM_BLOCK_COL;
 
 	public Map(Ball ball) {
 		super();
 		this.block = new Block[NUM_BLOCK];
-this.ball=ball;
+		this.ball = ball;
 		for (int i = 0; i < NUM_BLOCK_ROW; i++) {
 			for (int j = 0; j < NUM_BLOCK_COL; j++) {
 				int x = j;
@@ -30,30 +30,35 @@ this.ball=ball;
 
 	public void draw() {
 		int dx, dy;
-		dx = 3;
+		dx = 4;
 		dy = 3;
 		for (int i = 0; i < NUM_BLOCK_ROW; i++) {
 			for (int j = 0; j < NUM_BLOCK_COL; j++) {
 				if (block[i * NUM_BLOCK_COL + j].isDeleted() == false) {
 					if (block[i * NUM_BLOCK_COL + j].getMode() == 0) {
-						view.put('■', dx + j, dy + i);
-
+						view.drawString("■■", dx + j * 2, dy + i);
 					}
 				}
 			}
 		}
 	}
 
+	
 	public void Collision() {
-		int x, y;
+		int x, y,pos;
 		x = ball.getX();
 		y = ball.getY();
 
 		for (int i = 0; i < NUM_BLOCK; i++) {
-			if (block[i].isDeleted()==true)
+			if (block[i].isDeleted() == true)
 				continue;
-			else if (block[i].getX()==x-3&&block[i].getY()==y-3)
+			else if ((block[i].getX() == x / 2 - 2) && block[i].getY() == y - 3) {
 				block[i].Delete();
+				pos=i;
+			}
 		}
+	//	block[pos];
+		
+		
 	}
 }
