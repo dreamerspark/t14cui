@@ -62,6 +62,8 @@ public class Ball {
 				vy = -vy-3;
 				ch = this.x - player.getX() - 1;
 				vx += ch;
+				if(vx>15)vx=15;
+				else if(vx<-15)vx=15;
 				/*
 				 * int ch = this.x - player.getX(); vx += ch;
 				 */

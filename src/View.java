@@ -74,7 +74,7 @@ public class View {
 		drawString("■■■■■", player.getX() - 3, player.getY());
 		drawRect('#', 0, 1, WIDTH, HEIGHT - 1);
 	//	put('*', player.getX(), player.getY());
-		put('*', ball.getX(), ball.getY());
+		put('●', ball.getX(), ball.getY());
 		drawString(Integer.toString(player.getX()), WIDTH - 4, HEIGHT - 5);
 		drawString(Integer.toString(ball.getX()), WIDTH - 4, HEIGHT - 4);
 

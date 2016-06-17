@@ -31,8 +31,9 @@ public class Model {
 			if (timech == 2) {
 				ball.update();
 				timech = 0;
-				map.Collision();
+				map.Beforecol();
 			}
+			
 			timech++;
 		}
 		// for (Bullet b : bullets)
