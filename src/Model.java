@@ -33,18 +33,17 @@ public class Model {
 				timech = 0;
 				map.Beforecol();
 			}
-
+			map.bupdate();
 			timech++;
 		}
 		// for (Bullet b : bullets)
 		// b.update();
-		if (event.equals(" ")) {
+		if (event.equals("UP")) {
 			map.Makebullet(player.getX(), player.getY());
-	//		System.out.println(map.bulletsize());
-		}
-		if (event.equals("LEFT"))
+			System.out.println(map.bulletsize());
+		} else if (event.equals("LEFT"))
 			player.update(LEFT);
-		if (event.equals("RIGHT"))
+		else if (event.equals("RIGHT"))
 			player.update(RIGHT);
 
 		view.update();

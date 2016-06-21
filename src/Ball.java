@@ -62,8 +62,8 @@ public class Ball {
 				vy = -vy-3;
 				ch = this.x - player.getX() - 1;
 				vx += ch;
-				if(vx>15)vx=15;
-				else if(vx<-15)vx=15;
+				if(vx>10)vx=10;
+				else if(vx<-10)vx=-10;
 				/*
 				 * int ch = this.x - player.getX(); vx += ch;
 				 */
@@ -102,7 +102,7 @@ public class Ball {
 		x += vx;
 		y += vy;
 		// 左右の壁にぶつかった場合にバウンド
-		if (x < 1 || x > WIDTH-1) {
+		if (x < 0 || x > WIDTH-1) {
 			boundX();
 		}
 		// 上の壁にぶつかった場合にバウンド
@@ -112,5 +112,11 @@ public class Ball {
 		}
 		if(y>HEIGHT-2)y=HEIGHT-2;
 		
+	}
+
+	public void hitbul() {
+		// TODO 自動生成されたメソッド・スタブ
+		vy-=3;
+		boundX();
 	}
 }

@@ -9,7 +9,7 @@ public class Map {
 	// ブロックの行数
 	private static final int NUM_BLOCK_ROW = 20;
 	// ブロックの列数
-	private static final int NUM_BLOCK_COL = 38;
+	private static final int NUM_BLOCK_COL = 36;
 	// ブロック
 	private static final int NUM_BLOCK = NUM_BLOCK_ROW * NUM_BLOCK_COL;
 
@@ -46,8 +46,8 @@ public class Map {
 				}
 			}
 		}
-		for(Bullet b:bullets){
-			view.put('*',b.getX(),b.getY());
+		for (Bullet b : bullets) {
+			view.drawString("◎◎◎", b.getX(), b.getY());
 		}
 	}
 
@@ -84,7 +84,6 @@ public class Map {
 		int x, y, bx, by;
 		double tx, ty, ka, se;
 		double range;
-		bupdate();
 		x = ball.getX();
 		y = ball.getY();
 		bx = ball.getX() - ball.getVx();
@@ -99,7 +98,7 @@ public class Map {
 		int tex = bx, tey;
 		if (range > 0) {
 			for (double i = 0; i < range; i += range / (Math.abs(tx) + Math.abs(ty))) {
-				System.out.println(i);
+				// System.out.println(i);
 				if (tx != 0)
 					tex = (int) (bx + tx * i);
 				if (tx == 0)
@@ -115,7 +114,7 @@ public class Map {
 			}
 		} else {
 			for (double i = 0; i > range; i += range / (tx + ty)) {
-				System.out.println(i);
+				// System.out.println(i);
 				if (tx != 0)
 					tex = (int) (bx + tx * i);
 				if (tx == 0)
@@ -132,7 +131,7 @@ public class Map {
 		}
 	}
 
-	private void bupdate() {
+	public void bupdate() {
 		LinkedList<Bullet> delbul = new LinkedList<Bullet>();
 		// TODO 自動生成されたメソッド・スタブ
 		for (Bullet b : bullets) {
@@ -144,18 +143,32 @@ public class Map {
 				delbul.add(b);
 				continue;
 			}
+			if (BallBulletCollision(b) == true) {
+				delbul.add(b);
+				continue;
+			}
 			b.update();
 		}
 		bullets.removeAll(delbul);
+	}
+
+	private boolean BallBulletCollision(Bullet b) {
+		// TODO 自動生成されたメソッド・スタブ
+		if ((ball.getX() == b.getX()||ball.getX()==b.getX()+1) && ball.getY() == b.getY()) {
+			ball.hitbul();
+			return true;
+		}
+		return false;
 	}
 
 	private boolean BlockBulletCollision(Bullet b) {
 		for (int i = 0; i < NUM_BLOCK; i++) {
 			if (block[i].isDeleted() == true)
 				continue;
-			else if (block[i].getX() == b.getX() && block[i].getY() == b.getY())
+			else if (block[i].getX() == (b.getX() / 2) - 2 && block[i].getY() == b.getY() - 3) {
 				block[i].Delete();
-			return true;
+				return true;
+			}
 		}
 		return false;
 	}
