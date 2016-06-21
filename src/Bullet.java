@@ -7,7 +7,7 @@ public Bullet(int x,int y) {
 }
 
 public void update(){
-	if(y>1)y--;
+	if(y>0)y--;
 }
 
 public int getX() {

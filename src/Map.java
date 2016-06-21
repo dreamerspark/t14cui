@@ -1,8 +1,11 @@
+import java.util.LinkedList;
 
 public class Map {
 	private Block[] block;
 	private Ball ball;
 	private View view;
+	private Player player;
+	private LinkedList<Bullet> bullets;
 	// ブロックの行数
 	private static final int NUM_BLOCK_ROW = 20;
 	// ブロックの列数
@@ -10,10 +13,12 @@ public class Map {
 	// ブロック
 	private static final int NUM_BLOCK = NUM_BLOCK_ROW * NUM_BLOCK_COL;
 
-	public Map(Ball ball) {
+	public Map(Ball ball, Player player) {
 		super();
 		this.block = new Block[NUM_BLOCK];
 		this.ball = ball;
+		this.player = player;
+		this.bullets = new LinkedList<Bullet>();
 		for (int i = 0; i < NUM_BLOCK_ROW; i++) {
 			for (int j = 0; j < NUM_BLOCK_COL; j++) {
 				int x = j;
@@ -41,10 +46,13 @@ public class Map {
 				}
 			}
 		}
+		for(Bullet b:bullets){
+			view.put('*',b.getX(),b.getY());
+		}
 	}
 
 	public void Collision() {
-		int x, y, pos;
+		int x, y;
 		x = ball.getX();
 		y = ball.getY();
 
@@ -53,10 +61,8 @@ public class Map {
 				continue;
 			else if ((block[i].getX() == x / 2 - 2) && block[i].getY() == y - 3) {
 				block[i].Delete();
-				pos = i;
 			}
 		}
-		// block[pos];
 
 	}
 
@@ -78,6 +84,7 @@ public class Map {
 		int x, y, bx, by;
 		double tx, ty, ka, se;
 		double range;
+		bupdate();
 		x = ball.getX();
 		y = ball.getY();
 		bx = ball.getX() - ball.getVx();
@@ -124,4 +131,44 @@ public class Map {
 			}
 		}
 	}
+
+	private void bupdate() {
+		LinkedList<Bullet> delbul = new LinkedList<Bullet>();
+		// TODO 自動生成されたメソッド・スタブ
+		for (Bullet b : bullets) {
+			if (b.getY() <= 0) {
+				delbul.add(b);
+				continue;
+			}
+			if (BlockBulletCollision(b) == true) {
+				delbul.add(b);
+				continue;
+			}
+			b.update();
+		}
+		bullets.removeAll(delbul);
+	}
+
+	private boolean BlockBulletCollision(Bullet b) {
+		for (int i = 0; i < NUM_BLOCK; i++) {
+			if (block[i].isDeleted() == true)
+				continue;
+			else if (block[i].getX() == b.getX() && block[i].getY() == b.getY())
+				block[i].Delete();
+			return true;
+		}
+		return false;
+	}
+
+	public void Makebullet(int x, int y) {
+		if (bullets.size() < 3) {
+			bullets.add(new Bullet(x, y));
+		}
+	}
+
+	public int bulletsize() {
+		// TODO 自動生成されたメソッド・スタブ
+		return bullets.size();
+	}
+
 }

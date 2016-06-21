@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 public class Player {
 	private int x;
 	private int y;
@@ -41,10 +43,11 @@ public class Player {
 		if (a == DAMAGE) {
 			if (left == 0)
 				model.gameover();
+			left--;
 		}
 
 	}
-
+	
 	public void collision(Ball ball) {
 
 	}

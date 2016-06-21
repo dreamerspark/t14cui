@@ -20,8 +20,8 @@ public class Model {
 	public Model() {
 		this.player = new Player(this);
 		ball = new Ball(player.getX(), player.getY() - 2, player);
-		map = new Map(ball);
-		this.view = new View(this, player, ball,map);
+		map = new Map(ball, player);
+		this.view = new View(this, player, ball, map);
 		this.controller = new Controller(this);
 
 	}
@@ -33,16 +33,18 @@ public class Model {
 				timech = 0;
 				map.Beforecol();
 			}
-			
+
 			timech++;
 		}
 		// for (Bullet b : bullets)
 		// b.update();
-		if (event == "z")
-			bullets.add(new Bullet(player.getX(), player.getY()));
-		else if (event.equals("LEFT"))
+		if (event.equals(" ")) {
+			map.Makebullet(player.getX(), player.getY());
+	//		System.out.println(map.bulletsize());
+		}
+		if (event.equals("LEFT"))
 			player.update(LEFT);
-		else if (event.equals("RIGHT"))
+		if (event.equals("RIGHT"))
 			player.update(RIGHT);
 
 		view.update();
