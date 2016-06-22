@@ -47,7 +47,7 @@ public class Map {
 			}
 		}
 		for (Bullet b : bullets) {
-			view.drawString("◎◎◎", b.getX(), b.getY());
+			view.drawString("◎◎", b.getX(), b.getY());
 		}
 	}
 
@@ -97,7 +97,7 @@ public class Map {
 		}
 		int tex = bx, tey;
 		if (range > 0) {
-			for (double i = 0; i < range; i += range / (Math.abs(tx) + Math.abs(ty))) {
+			for (double i = 0; i < range; i += range / ((tx) + (ty))) {
 				// System.out.println(i);
 				if (tx != 0)
 					tex = (int) (bx + tx * i);

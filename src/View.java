@@ -1,5 +1,6 @@
 public class View {
 
+	private static final int VALIA = 1;
 	char screen[][];
 	private static int WIDTH = 80;
 	private static int HEIGHT = 43;
@@ -8,17 +9,19 @@ public class View {
 	private Ball ball;
 	private Model model;
 	private Map map;
+	private Moji moji;
 
 	public View() {
 		this(HEIGHT, WIDTH);
 	}
 
-	public View(Model model, Player player, Ball ball,Map map) {
+	public View(Model model, Player player, Ball ball, Map map) {
 		this();
 		// this.model = model;
 		this.player = player;
 		this.ball = ball;
 		this.map = map;
+		this.moji = new Moji(this);
 		map.setView(this);
 	}
 
@@ -61,6 +64,17 @@ public class View {
 		}
 	}
 
+	void drawRects(char c, int x, int y, int w, int h) {
+		for (int i = 0; i < h; i++) {
+			for (int j = 0; j < w; j++) {
+				if (i == 0 || i == h - 1 || j == 0 || j == w - 1)
+					this.put(c, x + j, y + i);
+				else
+					this.put(' ', x + j, y + i);
+			}
+		}
+	}
+
 	public void paint() {
 		for (int i = 0; i < HEIGHT; i++) {
 			System.out.println(screen[i]);
@@ -71,9 +85,15 @@ public class View {
 		// TODO 自動生成されたメソッド・スタブ
 		clear();
 		map.draw();
-		drawString("■■■■■", player.getX() - 3, player.getY());
+		if (player.getMode() != VALIA) {
+			drawString("■■■■■", player.getX() - 3, player.getY());
+		}
+		if (player.getMode() == VALIA) {
+			drawString("#■■■■■ #", player.getX() - 4, player.getY());
+			drawString("########", player.getX() - 4, player.getY() - 1);
+		}
 		drawRect('#', 0, 1, WIDTH, HEIGHT - 1);
-	//	put('*', player.getX(), player.getY());
+		// put('*', player.getX(), player.getY());
 		put('●', ball.getX(), ball.getY());
 		drawString(Integer.toString(player.getX()), WIDTH - 4, HEIGHT - 5);
 		drawString(Integer.toString(ball.getX()), WIDTH - 4, HEIGHT - 4);
@@ -84,4 +104,14 @@ public class View {
 
 		paint();
 	}
+
+	public void gameover() {
+		moji.gameover();
+	}
+
+	public void title(int select) {
+		// TODO 自動生成されたメソッド・スタブ
+		moji.title(select);
+	}
+
 }

@@ -59,6 +59,7 @@ public class Ball {
 		if (this.x >= player.getX() - 4 && this.x <= player.getX() + 4) {
 			int ch;
 			if (this.y == player.getY()) {
+				player.damage();
 				vy = -vy-3;
 				ch = this.x - player.getX() - 1;
 				vx += ch;
