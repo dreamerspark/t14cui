@@ -11,7 +11,7 @@ public class Ball {
 	private static final int NORMAL = 2;
 	private static final int HARD = 3;
 	private static int WIDTH = 80;
-	private static int HEIGHT = 43;
+	private static int HEIGHT = 41;
 
 	public Ball(int x, int y, Player player) {
 		this.x = x;
@@ -60,11 +60,13 @@ public class Ball {
 			int ch;
 			if (this.y == player.getY()) {
 				player.damage();
-				vy = -vy-3;
+				vy = -vy - 3;
 				ch = this.x - player.getX() - 1;
 				vx += ch;
-				if(vx>10)vx=10;
-				else if(vx<-10)vx=-10;
+				if (vx > 10)
+					vx = 10;
+				else if (vx < -10)
+					vx = -10;
 				/*
 				 * int ch = this.x - player.getX(); vx += ch;
 				 */
@@ -74,7 +76,7 @@ public class Ball {
 	}
 
 	public void update() {
-	
+
 		collision();
 		switch (NORMAL) {
 		case EASY:
@@ -93,7 +95,6 @@ public class Ball {
 
 	}
 
-	
 	private void gravity() {
 		// TODO 自動生成されたメソッド・スタブ
 		vy += 1;
@@ -103,21 +104,35 @@ public class Ball {
 		x += vx;
 		y += vy;
 		// 左右の壁にぶつかった場合にバウンド
-		if (x < 0 || x > WIDTH-1) {
+		if (x < 0 || x > WIDTH - 1) {
+			if (vx > 8)
+				vx--;
+			if (vx < -8)
+				vx++;
 			boundX();
+			if (x < 0)
+				x = 0;
+			if (x > WIDTH - 1)
+				x = WIDTH - 1;
 		}
 		// 上の壁にぶつかった場合にバウンド
-		if (y < 1 || y > HEIGHT-2) {
-			boundY();
-			if(y>HEIGHT-1)vy+=2;
+		if (y < 1 || y > HEIGHT - 2) {
+			if (vy < 0 && y > 1)
+				vy -= 3;
+			else
+				boundY();
+
+			if (y > HEIGHT - 1)
+				vy += 2;
 		}
-		if(y>HEIGHT-2)y=HEIGHT-2;
-		
+		if (y > HEIGHT - 2)
+			y = HEIGHT - 2;
+
 	}
 
 	public void hitbul() {
 		// TODO 自動生成されたメソッド・スタブ
-		vy-=3;
+		vy -= 3;
 		boundX();
 	}
 }

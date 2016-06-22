@@ -91,41 +91,23 @@ public class Map {
 		tx = x - bx;
 		ty = y - by;
 		range = Math.sqrt(tx * tx + ty * ty);
-		if (tx != 0) {
-			ka = ty / tx;
-			se = y - ka * x;
-		}
+		// if (tx != 0) {
+		// ka = ty / tx;
+		// se = y - ka * x;
+		// }
 		int tex = bx, tey;
-		if (range > 0) {
-			for (double i = 0; i < range; i += range / ((tx) + (ty))) {
-				// System.out.println(i);
-				if (tx != 0)
-					tex = (int) (bx + tx * i);
-				if (tx == 0)
-					tex = bx;
-				tey = (int) (by + ty * i);
-				for (int j = 0; j < NUM_BLOCK; j++) {
-					if (block[j].isDeleted() == true)
-						continue;
-					else if ((block[j].getX() == (tex / 2) - 2) && block[j].getY() == tey - 3) {
-						block[j].Delete();
-					}
-				}
-			}
-		} else {
-			for (double i = 0; i > range; i += range / (tx + ty)) {
-				// System.out.println(i);
-				if (tx != 0)
-					tex = (int) (bx + tx * i);
-				if (tx == 0)
-					tex = bx;
-				tey = (int) (by + ty * i);
-				for (int j = 0; j < NUM_BLOCK; j++) {
-					if (block[j].isDeleted() == true)
-						continue;
-					else if ((block[j].getX() == (tex / 2) - 2) && block[j].getY() == tey - 3) {
-						block[j].Delete();
-					}
+		for (double i = 0; i < 1; i += 1 / (Math.abs(tx) + Math.abs(ty))) {
+			// System.out.println(i);
+			if (tx != 0)
+				tex = bx + (int) Math.round(tx * i);
+			if (tx == 0)
+				tex = bx;
+			tey = by + (int) Math.round(ty * i);
+			for (int j = 0; j < NUM_BLOCK; j++) {
+				if (block[j].isDeleted() == true)
+					continue;
+				else if ((block[j].getX() == (tex / 2) - 2) && block[j].getY() == tey - 3) {
+					block[j].Delete();
 				}
 			}
 		}
@@ -154,7 +136,7 @@ public class Map {
 
 	private boolean BallBulletCollision(Bullet b) {
 		// TODO 自動生成されたメソッド・スタブ
-		if ((ball.getX() == b.getX()||ball.getX()==b.getX()+1) && ball.getY() == b.getY()) {
+		if ((ball.getX() == b.getX() || ball.getX() == b.getX() + 1) && ball.getY() == b.getY()) {
 			ball.hitbul();
 			return true;
 		}

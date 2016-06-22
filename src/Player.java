@@ -4,6 +4,7 @@ public class Player {
 	private int left;
 	private int Width;
 	private Model model;
+	private Status status;
 	private int mode = 0;
 	private static final int NO_ACTION = 0;
 	private static final int VALIA = 1;
@@ -14,11 +15,15 @@ public class Player {
 
 	public Player(Model model) {
 		this.x = 40;
-		this.y = 41;
+		this.y = 39;
 		this.left = 3;
 		this.model = model;
 		this.Width = 76;
 		this.mode = NO_ACTION;
+	}
+
+	public void setSta(Status status) {
+		this.status = status;
 	}
 
 	public int getX() {
@@ -50,20 +55,18 @@ public class Player {
 			mode = VALIA;
 		}
 		if (a == DAMAGE && mode != VALIA) {
-			if (left <= 3)
+			if (status.zankidown() <= 0)
 				model.gameover();
-			left--;
-			x=40;
+			x = 40;
 			mode = VALIA;
 		}
-		if(a==DAMAGE && mode ==VALIA){
+		if (a == DAMAGE && mode == VALIA) {
 			mode = NO_ACTION;
 		}
 		if (a == SHOTING)
 			mode = SHOTING;
 
 	}
-
 
 	public void damage() {
 		// TODO 自動生成されたメソッド・スタブ
