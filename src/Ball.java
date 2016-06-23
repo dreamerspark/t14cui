@@ -4,9 +4,7 @@ public class Ball {
 	private int vx;
 	private int vy;
 	private int times;
-	private int mode;
 	private Player player;
-	private static final double GRAVITY = 0.5;
 	private static final int EASY = 1;
 	private static final int NORMAL = 2;
 	private static final int HARD = 3;

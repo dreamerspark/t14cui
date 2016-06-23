@@ -7,7 +7,6 @@ public class Player {
 	private int mode = 0;
 	private static final int NO_ACTION = 0;
 	private static final int VALIA = 1;
-	private static final int SHOTING = 2;
 	private static final int DAMAGE = 9;
 	private static final int LEFT = 3;
 	private static final int RIGHT = 4;

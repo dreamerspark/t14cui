@@ -7,7 +7,6 @@ public class View {
 
 	private Player player;
 	private Ball ball;
-	private Model model;
 	private Map map;
 	private Moji moji;
 
@@ -15,7 +14,7 @@ public class View {
 		this(HEIGHT, WIDTH);
 	}
 
-	public View(Model model, Player player, Ball ball, Map map) {
+	public View(Player player, Ball ball, Map map) {
 		this();
 		// this.model = model;
 		this.player = player;
@@ -127,6 +126,11 @@ public class View {
 	public void start() {
 		// TODO 自動生成されたメソッド・スタブ
 		moji.start();
+	}
+
+	public void ranking(int[] ranking) {
+		// TODO 自動生成されたメソッド・スタブ
+		moji.ranking(ranking);
 	}
 
 }
