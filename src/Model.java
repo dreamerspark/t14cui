@@ -93,8 +93,10 @@ public class Model {
 					select++;
 			}
 			if (event.equals("z")) {
-				if (select == 0)
+				if (select == 0 || select == 1) {
 					mode = STAGE;
+					player.setSta(status);
+				}
 			}
 			view.title(select);
 			break;
@@ -124,6 +126,7 @@ public class Model {
 				ball = new Ball(2, player.getY() - 10, player);
 				map = new Map(ball, player);
 				this.view = new View(this, player, ball, map);
+				this.status = new Status(view);
 			}
 			view.gameover();
 			break;

@@ -40,20 +40,21 @@ public class Status {
 	}
 
 	public void draw() {
-		String min = String.format("%1$03d", minute);
-		String sec = String.format("%1$03d", time);
+		String min = String.format("%1$02d", minute);
+		String sec = String.format("%1$02d", time);
 		String sco = String.format("%1$06d", score);
 		String zan = "";
-		for (int i = 0; i >ZANKI; i++) {
-			if(zanki>i){
+		int x = 0, y = 41;
+		for (int i = 0; i < ZANKI; i++) {
+			if (zanki > i) {
 				zan += "◯";
-			}else{
+			} else {
 				zan += "●";
 			}
 		}
-		int x = 0, y = 41;
-		view.drawRect('#', x, y, 80, 2);
-		view.drawString("PLAYER "+zan + " # SCORE " + sco + " # TIME " + min + ":" + sec, x + 10, 42);
+		
+		view.drawRect('#', x, y, 80, 3);
+		view.drawString("PLAYER " + zan + " # SCORE " + sco + " # TIME " + min + ":" + sec, x + 10, 42);
 		view.paint();
 	}
 
