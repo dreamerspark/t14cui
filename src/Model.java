@@ -23,6 +23,9 @@ public class Model {
 	private static final int VALIA = 1;
 	private static final int LEFT = 3;
 	private static final int RIGHT = 4;
+	private static final int START = 7;
+	private static final int TIME = 3;
+	private static final int ZANKi = 4;
 	// private long time = 0, time2;
 	private int times;
 	private int time;
@@ -31,16 +34,16 @@ public class Model {
 	public Model() {
 		mode = TITLE;
 		select = 0;
-		stage = 1;
+		stage = 5;
 		time = 0;
 		times = 0;
 		timin = 0;
 		this.player = new Player(this);
 		ball = new Ball(2, player.getY() - 10, player);
-		map = new Map(ball, player);
+		map = new Map(ball);
 		this.view = new View(this, player, ball, map);
 		this.controller = new Controller(this);
-		this.status = new Status(view);
+		this.status = new Status(view,0);
 	}
 
 	public synchronized void process(String event) {
@@ -75,7 +78,8 @@ public class Model {
 				player.update(LEFT);
 			else if (event.equals("RIGHT"))
 				player.update(RIGHT);
-
+			if (map.checkclear() == true)
+				mode = CLEAR;
 			view.update();
 			status.draw();
 			break;
@@ -96,6 +100,7 @@ public class Model {
 				if (select == 0 || select == 1) {
 					mode = STAGE;
 					player.setSta(status);
+					map.setStatus(status);
 				}
 			}
 			view.title(select);
@@ -103,9 +108,21 @@ public class Model {
 		case CLEAR:
 			if (event.equals("z")) {
 				stage++;
-				mode = NORMAL;
+				status.scoreplus(CLEAR);
+				status.scoreplus(TIME);
+				status.scoreplus(ZANKi);
+				int a=status.getScore();
+				this.player = new Player(this);
+				ball = new Ball(2, player.getY() - 10, player);
+				map = new Map(ball);
+				this.view = new View(this, player, ball, map);
+				this.status = new Status(view,a);
+				player.setSta(status);
+				map.setStatus(status);
+				mode = STAGE;
+				if(stage==6)mode =TITLE;
 			}
-			view.clears();
+			view.clears(status.getScore(), status.getZanki(), stage);
 			break;
 		case STAGE:
 			if (event.equals("TIME_ELAPSED")) {
@@ -113,20 +130,32 @@ public class Model {
 					times = 0;
 					status.setMinute(3);
 					status.setTime(0);
-					mode = NORMAL;
+					mode = START;
+					map.stageread(stage);
 				}
 				times++;
 			}
 			view.stage(stage);
+			break;
+		case START:
+			if (event.equals("TIME_ELAPSED")) {
+				if (times == 15) {
+					times = 0;
+					mode = NORMAL;
+				}
+				times++;
+			}
+			view.start();
 			break;
 		case GAMEOVER:
 			if (event.equals("r")) {
 				mode = TITLE;
 				this.player = new Player(this);
 				ball = new Ball(2, player.getY() - 10, player);
-				map = new Map(ball, player);
+				map = new Map(ball);
 				this.view = new View(this, player, ball, map);
-				this.status = new Status(view);
+				this.status = new Status(view,0);
+				stage=1;
 			}
 			view.gameover();
 			break;

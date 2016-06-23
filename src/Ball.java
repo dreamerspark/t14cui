@@ -61,7 +61,7 @@ public class Ball {
 			if (this.y == player.getY()) {
 				player.damage();
 				vy = -vy - 3;
-				ch = this.x - player.getX() - 1;
+				ch = (this.x - player.getX() - 1)/2;
 				vx += ch;
 				if (vx > 10)
 					vx = 10;
@@ -83,7 +83,7 @@ public class Ball {
 			move();
 			break;
 		case NORMAL:
-			if (times == 3) {
+			if (times == 4) {
 				gravity();
 				times = 0;
 			}
@@ -123,7 +123,7 @@ public class Ball {
 				boundY();
 
 			if (y > HEIGHT - 1)
-				vy += 2;
+				vy += 1;
 		}
 		if (y > HEIGHT - 2)
 			y = HEIGHT - 2;

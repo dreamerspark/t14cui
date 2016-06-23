@@ -1,7 +1,6 @@
 public class Player {
 	private int x;
 	private int y;
-	private int left;
 	private int Width;
 	private Model model;
 	private Status status;
@@ -16,7 +15,6 @@ public class Player {
 	public Player(Model model) {
 		this.x = 40;
 		this.y = 39;
-		this.left = 3;
 		this.model = model;
 		this.Width = 76;
 		this.mode = NO_ACTION;
@@ -63,8 +61,8 @@ public class Player {
 		if (a == DAMAGE && mode == VALIA) {
 			mode = NO_ACTION;
 		}
-		if (a == SHOTING)
-			mode = SHOTING;
+		//if (a == SHOTING)
+		//	mode = SHOTING;
 
 	}
 

@@ -10,10 +10,11 @@ public Block(int x, int y){
 	mode=0;
 }
 
-public Block(int x,int y,boolean d){
+public Block(int x,int y,char a){
 	this.x=x;
 	this.y=y;
-	isDeleted=d;
+	if(a=='1')isDeleted=false;
+	if(a=='0')isDeleted=true;
 	mode=0;
 }
 

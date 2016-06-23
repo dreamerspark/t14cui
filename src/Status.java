@@ -4,20 +4,22 @@ public class Status {
 	private static final int ZANKI = 3;
 	//スコア用の検出定数
 	private static final int BLOCK = 1;
-	private static final int CLEAR = 2;
+	private static final int CLEAR = 8;
 	private static final int TIME = 3;
 	private static final int ZANKi = 4;
 	int zanki;//現在の残機
 	int score;//スコア
 	int time;//秒単位の時間
 	int minute;//分単位の時間
+	int stage;
 	private View view;
 
-	public Status(View view) {
+	public Status(View view, int i) {
 		zanki = ZANKI;
-		score = 0;
+		score = i;
 		time = 0;
 		minute = 0;
+		stage =1;
 		this.view = view;
 	}
 
@@ -39,12 +41,23 @@ public class Status {
 
 	public void scoreplus(int a) {
 		if(a==BLOCK)score+=100;
-		if(a==CLEAR)score+=10000;
+		if(a==CLEAR)score+=10000*stage++;
 		if(a==TIME)score+=time*100+minute*6000;
 		if(a==ZANKi)score+=zanki*1000;
 	}
 
+	public int getZanki() {
+		return zanki;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
 	public void count() {
+		if(time==0&&minute==0){
+			return;
+		}
 		if (time == 0) {
 			time = 59;
 			minute--;
@@ -60,9 +73,9 @@ public class Status {
 		int x = 0, y = 41;
 		for (int i = 0; i < ZANKI; i++) {
 			if (zanki > i) {
-				zan += "◯";
-			} else {
 				zan += "●";
+			} else {
+				zan += "◯";
 			}
 		}
 

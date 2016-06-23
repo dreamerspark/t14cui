@@ -114,14 +114,19 @@ public class View {
 		moji.title(select);
 	}
 
-	public void clears() {
+	public void clears(int i, int j, int stage) {
 		// TODO 自動生成されたメソッド・スタブ
-		moji.clear();
+		moji.clear(i, j, stage);
 	}
 
 	public void stage(int select) {
 		// TODO 自動生成されたメソッド・スタブ
 		moji.stage(select);
+	}
+
+	public void start() {
+		// TODO 自動生成されたメソッド・スタブ
+		moji.start();
 	}
 
 }
