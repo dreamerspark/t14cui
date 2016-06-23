@@ -1,14 +1,20 @@
 
 public class Status {
+	//残機MAXの設定
 	private static final int ZANKI = 3;
-	int zanki;
-	int score;
-	int time;
-	int minute;
+	//スコア用の検出定数
+	private static final int BLOCK = 1;
+	private static final int CLEAR = 2;
+	private static final int TIME = 3;
+	private static final int ZANKi = 4;
+	int zanki;//現在の残機
+	int score;//スコア
+	int time;//秒単位の時間
+	int minute;//分単位の時間
 	private View view;
 
 	public Status(View view) {
-		zanki = 3;
+		zanki = ZANKI;
 		score = 0;
 		time = 0;
 		minute = 0;
@@ -29,6 +35,13 @@ public class Status {
 
 	public void setMinute(int minute) {
 		this.minute = minute;
+	}
+
+	public void scoreplus(int a) {
+		if(a==BLOCK)score+=100;
+		if(a==CLEAR)score+=10000;
+		if(a==TIME)score+=time*100+minute*6000;
+		if(a==ZANKi)score+=zanki*1000;
 	}
 
 	public void count() {
@@ -52,7 +65,7 @@ public class Status {
 				zan += "●";
 			}
 		}
-		
+
 		view.drawRect('#', x, y, 80, 3);
 		view.drawString("PLAYER " + zan + " # SCORE " + sco + " # TIME " + min + ":" + sec, x + 10, 42);
 		view.paint();
